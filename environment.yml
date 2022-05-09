@@ -1,0 +1,21 @@
+name: bringing-perception
+channels:
+  - conda-forge
+  - pytorch
+  - defaults
+dependencies:
+  - python=3.8.10
+  - black
+  - cudatoolkit=11.3
+  - docopt
+  - gdown
+  - isort
+  - numpy
+  - opencv
+  - pandas
+  - pip
+  - pylint
+  - pytorch
+  - torchvision
+  - tqdm
+  - wandb
