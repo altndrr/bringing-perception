@@ -3,10 +3,12 @@ src
 
 Usage:
     src download <dataset>
+    src prepare <dataset_dir> [--num VAL]
     src -h | --help
     src --version
 
 Options:
+    -n VAL --num=VAL            Num of triplets to generate
     -h --help                   Show the help screen
     --version                   Print the current version
 """
@@ -18,9 +20,9 @@ import torch
 from docopt import docopt
 
 from src import __version__
-from src.commands import download_datasets
+from src.commands import download_datasets, prepare_data
 
-COMMANDS = {"download": download_datasets}
+COMMANDS = {"download": download_datasets, "prepare": prepare_data}
 
 
 def main():
