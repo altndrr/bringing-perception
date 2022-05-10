@@ -17,16 +17,25 @@ def download_datasets(*args, **kwargs):
         output_dir = "./datasets/lfw/"
         os.makedirs(output_dir, exist_ok=True)
 
-        drive_ids = {"train": "1PY8rxEGxNruwNajEEkJgq3cSXIUg_R7R"}
+        drive_ids = {
+            "train": "1PY8rxEGxNruwNajEEkJgq3cSXIUg_R7R",
+            "test": "1VaahGkQc36dQy7q08AfEgiS4tqitSY4K",
+        }
         for split, drive_id in drive_ids.items():
             download_path = f"./datasets/lfw_{split}.zip"
             output_path = f"./datasets/lfw/{split}"
 
             gdown.download(id=drive_id, output=download_path)
-
             with zipfile.ZipFile(download_path) as file:
                 file.extractall(output_dir)
 
-            shutil.move(os.path.join(output_dir, "lfw"), output_path)
+            if split == "train":
+                shutil.move(os.path.join(output_dir, "lfw"), output_path)
+            elif split == "test":
+                for elem in ["query", "gallery"]:
+                    shutil.move(
+                        os.path.join(output_dir, elem),
+                        os.path.join(output_path, elem),
+                    )
     else:
         raise ValueError(f"{dataset} is not a known dataset")

@@ -16,9 +16,7 @@ from docopt import docopt
 from src import __version__
 from src.commands import download_datasets
 
-COMMANDS = {
-    "download": download_datasets
-}
+COMMANDS = {"download": download_datasets}
 
 
 def main():
