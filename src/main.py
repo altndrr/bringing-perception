@@ -11,6 +11,10 @@ Options:
     --version                   Print the current version
 """
 
+import random
+
+import numpy as np
+import torch
 from docopt import docopt
 
 from src import __version__
@@ -22,6 +26,11 @@ COMMANDS = {"download": download_datasets}
 def main():
     """Main execution."""
     options = docopt(__doc__, version=__version__)
+
+    # Set determinism.
+    np.random.seed(1234)
+    random.seed(1234)
+    torch.manual_seed(1234)
 
     for key in options:
         command = COMMANDS.get(key)
