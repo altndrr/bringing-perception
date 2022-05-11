@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="6c66622b-94ec-46bc-8e36-7943276bf0c8" name="ml-lab-a48e4102-b201-4327-affb-720d2370736a.westeurope.cloudapp.azure.com">
+        <fileTransfer accessType="SFTP" host="ml-lab-a48e4102-b201-4327-affb-720d2370736a.westeurope.cloudapp.azure.com" port="56379" sshConfigId="0416d03c-f177-46a7-b761-85e8b5f2ed02" sshConfig="spoppi@ml-lab-a48e4102-b201-4327-affb-720d2370736a.westeurope.cloudapp.azure.com:56379 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
