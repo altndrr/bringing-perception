@@ -17,13 +17,16 @@ class CelebA(DS.ClassificationDataset):
             download=False,
             **kwargs
     ):
-        drive_ids = {
-            'celeba': '0B7EVK8r0v71pZjFTYXZWM3FlRnM'
-        }
-        split, drive_id = tuple(*drive_ids.items())
-        download_path = os.path.join(root,'celeba/img_align_celeba.zip')
 
-        gdown.download(id=drive_id, output=download_path)
+        download_path = os.path.join(root, 'celeba/img_align_celeba.zip')
+        if not os.path.isfile(download_path):
+            drive_ids = {
+                'celeba': '0B7EVK8r0v71pZjFTYXZWM3FlRnM'
+            }
+            split, drive_id = tuple(*drive_ids.items())
+
+
+            gdown.download(id=drive_id, output=download_path)
 
         super(CelebA, self).__init__(
             name=name,
