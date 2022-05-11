@@ -1,6 +1,7 @@
 import torchvision.datasets.celeba as CELEBA
 import datasets.dataset as DS
 import gdown
+import os
 
 class CelebA(DS.ClassificationDataset):
 
@@ -20,7 +21,7 @@ class CelebA(DS.ClassificationDataset):
             'celeba': '0B7EVK8r0v71pZjFTYXZWM3FlRnM'
         }
         split, drive_id = tuple(*drive_ids.items())
-        download_path = './datasets/celeba/img_align_celeba.zip'
+        download_path = os.path.join(root,'celeba/img_align_celeba.zip')
 
         gdown.download(id=drive_id, output=download_path)
 
