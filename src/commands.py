@@ -12,6 +12,7 @@ import numpy as np
 import requests as r
 import torch
 import torchvision.transforms as T
+from facenet_pytorch import MTCNN
 from PIL import Image
 from torchvision.datasets import ImageFolder
 from torchvision.models.resnet import resnet50
@@ -149,6 +150,16 @@ def _fixed_image_standardization(image):
 
 def _read_images(images):
     tensors = []
+
+    mtcnn = MTCNN(
+        image_size=160,
+        margin=14,
+        selection_method="center_weighted_size",
+        device="cuda",
+    )
+
+    transformations = T.Compose([np.float32, T.ToTensor(), T.Resize((160, 160))])
+
     for image in images:
         if isinstance(image, str):
             if not os.path.exists(image) or not os.path.isfile(image):
@@ -159,11 +170,15 @@ def _read_images(images):
         # Convert to RGB to fix the number of channels to three.
         image = image.convert("RGB")
 
-        transformations = T.Compose([np.float32, T.ToTensor(), T.Resize((160, 160))])
-        tensors.append(transformations(image))
+        face = mtcnn(image)
+        extract = face
+        if extract is None:
+            extract = _fixed_image_standardization(transformations(image))
+        tensors.append(extract)
 
-    tensors = [_fixed_image_standardization(tensor) for tensor in tensors]
-    return torch.stack(tensors)
+    tensors = torch.stack(tensors, dim=0)
+
+    return tensors
 
 
 def _submit(results):

@@ -26,7 +26,11 @@ from docopt import docopt
 from src import __version__
 from src.commands import download_datasets, prepare_data, test_gallery
 
-COMMANDS = {"download": download_datasets, "prepare": prepare_data, "test": test_gallery}
+COMMANDS = {
+    "download": download_datasets,
+    "prepare": prepare_data,
+    "test": test_gallery,
+}
 
 
 def main():
